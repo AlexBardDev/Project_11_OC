@@ -1,0 +1,49 @@
+{% extends 'food_substitute/base.html' %}
+
+{% block title_page %}Rechercher un substitut plus sain{% endblock %}
+
+{% block content %}
+
+	{% include 'food_substitute/product.html' %}
+	
+	<!-- Display healthier substitutes -->
+	<section class="container-fluid" id="substitute">
+		{% if list_substitute %}
+			<h3 class="text-center">Vous pouvez remplacer cet aliment par :</h3>
+			<div class="row">
+				{% for product in list_substitute %}
+					<div class="col-md-4 text-center">
+						<p class="nutriscore">{{ product.nutriscore|capfirst }}</p>
+						<a href="{% url 'display' product.name %}">
+							<img src="{{ product.image }}" alt="image product" width="200" height="200"/>
+							<p>{{ product.name }}</p>
+						</a>
+						<p><span class="far fa-save"></span> <a href="{% url 'save_product' product.name %}">Sauvegarder</a></p>
+					</div>
+				{% endfor %}
+			</div>
+
+			<!-- Pagination -->
+			<div class="pagination">
+			    <span class="step-links">
+			        {% if list_substitute.has_previous %}
+				<a href="?page={{ list_substitute.previous_page_number }}"><span class="fas fa-angle-double-left"></span></a>
+				{% endif %}
+
+				{% if list_substitute.has_previous or list_substitute.has_next %}
+					<span class="page_number">
+						Page {{ list_substitute.number }} of {{ list_substitute.paginator.num_pages }}
+					</span>
+				{% endif %}
+
+				{% if list_substitute.has_next %}
+					<a href="?page={{ list_substitute.next_page_number }}"><span class="fas fa-angle-double-right"></span></a>
+				{% endif %}
+			    </span>
+			</div>	
+		{% else %}
+			<h3 class="text-center">Désolé, nous n'avons pas trouvé de substitut plus sain.</h3>
+			<p class="text-center"><a href="{% url 'display' product.name %}">Voir la page complète de l'aliment !</a></p>
+		{% endif %}
+	</section>
+{% endblock %}

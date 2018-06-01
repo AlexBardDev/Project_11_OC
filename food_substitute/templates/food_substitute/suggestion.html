@@ -1,0 +1,17 @@
+{% extends "food_substitute/base.html" %}
+
+{% block title_page %}Suggestions pour votre recherche{% endblock %}
+
+{% block content %}
+	<section id="suggestions">
+		<h2 class="text-center">Désolé, mais nous n'avons rien trouvé pour votre recherche : <span>{{ product }}</span>.</h2>
+		<h2 class="text-center">Voulez-vous dire :</h2>
+		<div class="row">
+			{% for suggestion in list_suggestions %}
+				<div class="col-md-4 text-center">
+					<a href="{% url 'search' suggestion.name %}">{{ suggestion.name }}</a>
+				</div>
+			{% endfor %}
+		</div>	
+	</section>
+{% endblock %}

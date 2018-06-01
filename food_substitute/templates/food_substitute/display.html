@@ -1,0 +1,44 @@
+{% extends "food_substitute/base.html" %}
+
+{% block title_page %}Informations produits{% endblock %}
+
+{% block content %}
+	{% if product %}		
+		{% include 'food_substitute/product.html' %}
+
+		<section class="container-fluid" id="display">
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<h2>Nutriscore</h2>
+					<p>
+						{% for letter in list_letters %}
+							{% if letter|lower == product.nutriscore %}
+								<span class="nutri">{{ letter }}</span>	
+							{% else %}
+								<span>{{ letter }}</span>
+							{% endif %}
+						{% endfor %}
+					</p>
+				</div>
+				<div class="col-md-6">
+					<h2>Repères nutritionnels pour 100g</h2>
+					<p>Calories : {{ product.id_nutritional_information.calories }}</p>
+					<p>Graisses : {{ product.id_nutritional_information.fat }}</p>
+					<p class="dont">Dont saturés : {{ product.id_nutritional_information.saturated_fat }}</p>
+					<p>Glucides : {{ product.id_nutritional_information.carbohydrates }}</p>
+					<p class="dont">Dont sucres : {{ product.id_nutritional_information.sugars }}</p>
+					<p>Protéines : {{ product.id_nutritional_information.proteins }}</p>
+					<p>Sel : {{ product.id_nutritional_information.salt }}</p>
+					<p class="dont">Dont Sodium : {{ product.id_nutritional_information.sodium }}</p>
+				</div>
+			</div>
+			<div class="row">
+				<a class="text-center" href="{{ product.link }}" target="_blank">Voir la fiche complète d'OpenFoodFacts</a>
+			</div>
+		</section>
+	{% else %}
+		<section id="no_product">
+			<h2 class="text-center">Désolé mais nous n'avons pas trouvé l'aliment recherché.</h2>
+		</section>
+	{% endif %}
+{% endblock %}

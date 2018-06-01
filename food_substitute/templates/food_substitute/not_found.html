@@ -1,0 +1,10 @@
+{% extends 'food_substitute/base.html' %}
+
+{% block title_page %}Désolé, nous n'avons rien trouvé...{% endblock %}
+
+{% block content %}
+	<section id="not_found" class="text-center">
+		<h2>Désolé mais nous n'avons pas trouvé d'aliment pour <span>{{ product }}</span>.</h2>
+		<p>Veuillez revenir en arrière ou faire une nouvelle recherche.</p>
+	</section>
+{% endblock %}

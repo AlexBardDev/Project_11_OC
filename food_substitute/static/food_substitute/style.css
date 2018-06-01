@@ -1,0 +1,373 @@
+/* Font policy for the whole web site */
+body
+{
+	font-family: "Scope One", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: "Open Sans", sans-serif;	
+}
+
+/* Navigation */
+nav form
+{
+	margin-right: 20px;
+}
+
+#mainNav, #mainNav:first-child
+{
+	border-bottom: 1px black solid;
+	background-color: rgb(232, 167, 93);
+}
+
+nav a span
+{
+	color: black;
+}
+
+/* Home(=home.html) */
+#about
+{
+	background: url('images/image_home.jpeg') repeat fixed top center;
+}
+
+#about h1, #about h2
+{
+	color: white;
+	text-shadow: 3px 3px 3px black;
+	margin-bottom: 20px;
+}
+
+section form
+{
+	max-width: 500px;
+	margin: auto;
+}
+
+.btn-outline-primary
+{
+	background-color: rgb(196, 85, 37);
+	color: rgb(134, 235, 230);
+	border-radius: 5px;
+}
+
+.btn-outline-primary:hover
+{
+	background-color: rgb(134, 235, 230);
+	color: rgb(196, 85, 37);
+}
+
+#services
+{
+	background-color: rgb( 196, 85, 37 );
+	color: white;
+}
+
+.quote
+{
+	font-style: italic;
+}
+
+#contact
+{
+	background-color: rgb(134, 235, 230);
+}
+
+/* Product(=product.html) */
+#product
+{
+	background-color: black;
+	height: 350px;
+}
+
+#product div
+{
+	height: 200px;
+	width: 250px;
+	margin: auto;
+}
+
+#product div p
+{
+	position: relative;
+	width: 250px;
+	top: -20px;
+	padding: 5px;
+	font-weight: bold;
+	background-color: white;
+	border-radius: 20px;
+}
+
+/* Substitute(=search.html) */
+#substitute
+{
+	background-color: rgb(196, 85, 37);
+	color: white;
+}
+
+#substitute h3
+{
+	margin-bottom: 50px;
+}
+
+.nutriscore
+{
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	font-size: 3em;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	position: relative;
+	top: 50px;
+	left: 270px;
+}
+
+#substitute a p
+{
+	margin-top: 10px;
+}
+
+/* Links */
+#substitute a, #substitute a:visited, #suggestions a, #suggestions a:visited, #display a, #display a:visited, #login a, #login a:visited, #legal_notices a, #legal_notices a:visited, #bookmarks a, #bookmarks a:visited
+{
+	color: rgb(134, 235, 230);
+	font-weight: bold;
+}
+
+#substitute a:hover, #suggestions a:hover, #display a:hover, #login a:hover, #legal_notices a:hover, #bookmarks a:hover
+{
+	font-style: italic;
+}
+
+/* Pagination(=search.html) */
+.step-links
+{
+	width: 200px;
+	margin: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.page_number
+{
+	color: black;
+	font-weight: bold;
+}
+
+/* Common value for not_found.html, suggestion.html and bookmark.html */
+#not_found, #suggestions, #bookmarks, #no_product
+{
+	background-color: rgb(222, 148, 64);
+	min-height: 600px;
+}
+
+#not_found span, #suggestions span
+{
+	font-style: italic;
+	text-decoration: underline;
+}
+
+#not_found p
+{
+	margin-top: 40px;
+	font-size: 1.2em;
+}
+
+#suggestions h2
+{
+	margin-bottom: 20px;
+}
+
+/* Display data(=display.html) */
+#display
+{
+	background-color: rgb(196, 85, 37);
+}
+
+#display h2
+{
+	margin-bottom: 30px;
+	text-decoration: underline;
+}
+
+#display p
+{
+	font-size: 1.5em;
+}
+
+#display .nutri
+{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#display .dont
+{
+	margin-left: 50px;
+}
+
+#display .dont:last-child
+{
+	margin-bottom: 50px;
+}
+
+#display a
+{
+	width: 350px;
+	margin: auto;
+	background-color: grey;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+/* Login and new account */
+#login, #new_account
+{
+	background-color: rgb(196, 85, 37);
+	min-height: 600px;
+}
+
+#login h2, #new_account h2
+{
+	margin-bottom: 50px;
+}
+
+#login em
+{
+	color: white;
+}
+
+#login p
+{
+  color: white;	
+}
+
+#login form, #new_account form
+{
+	color:white;
+}
+
+#login input[type="submit"], #new_account input[type="submit"]
+{
+	background-color: rgb(52, 90, 97);
+	color: rgb(232, 167, 93);
+	border: 1px black solid;
+	border-radius: 10px;
+	font-weight: bold;
+}
+
+#login input[type="submit"]:hover, #new_account input[type="submit"]:hover
+{
+	background-color: rgb(232, 167, 93);rgb(52, 90, 97);
+	color: rgb(52, 90, 97);
+}
+
+#background_picture
+{
+	background: url('images/image_home.jpeg') center repeat;
+}
+
+/* Legal notices(=legal_notices.html) */
+#legal_notices
+{
+	background-color: rgb(196, 85, 37);
+}
+
+#legal_notices h4
+{
+	text-decoration: underline;
+	margin-left: 200px;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+#legal_notices p
+{
+	margin-left: 250px;
+	color: white;
+}
+
+/* Bookmark(=Bookmark.html) */
+#bookmarks p
+{
+	margin-top: 15px;
+}
+
+#bookmarks div[class*="col-md-4"]
+{
+	margin-top: 50px;
+}
+
+/* Footer */
+footer
+{
+	border-top: 2px black solid;
+	background-color: rgb(52, 90, 97);
+}
+
+footer a, footer a:visited
+{
+	color: white;
+	padding: 20px;
+}
+
+footer a:hover
+{
+	color: white;
+}
+
+/* Message with Django(=base.html) */
+.special_message
+{
+	margin-top: 70px;
+	font-style: italic;
+	font-size: 1.5em;
+}
+
+/* Media Queries */
+@media all and (max-width: 1150px)
+{
+	.nutriscore
+	{
+		left: 240px;
+	}
+}
+@media all and (max-width: 992px)
+{
+	.nutriscore
+	{
+		left: 210px;
+	}
+}
+@media all and (max-width: 870px)
+{
+	.nutriscore
+	{
+		left: 200px;
+	}
+}
+@media all and (max-width: 768px)
+{
+	.nutriscore
+	{
+		left: 430px;
+	}
+}
+@media all and (max-width: 670px)
+{
+	.nutriscore
+	{
+		left: 300px;
+	}
+}
+@media all and (max-width: 576px)
+{
+	.nutriscore
+	{
+		left: 200px;
+	}
+}
+

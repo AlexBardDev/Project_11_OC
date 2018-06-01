@@ -1,0 +1,24 @@
+{% extends "food_substitute/base.html" %}
+
+{% block title_page %}Mes substituts enregistrés{% endblock %}
+
+{% block content %}
+	<section id="bookmarks">
+		{% if list_bookmarks %}
+			<h2 class="text-center">Vos substituts déjà enregistrés :</h2>
+			<div class="row">
+			{% for bookmark in list_bookmarks %}
+				<div class="col-md-4 text-center">
+					<p class="nutriscore">{{ bookmark.id_product.nutriscore|capfirst }}</p>
+					<a href="{% url 'display' bookmark.id_product.name %}">
+					    <img src="{{ bookmark.id_product.image }}" alt="image product" width="200" height="200"/>
+					    <p>{{ bookmark.id_product.name }}</p>
+					</a>
+				</div>
+			{% endfor %}
+			</div>
+		{% else %}
+			<h2 class="text-center">Vous n'avez pas encore de substituts enregistrés.</h2>
+		{% endif %}
+	</section>
+{% endblock %}
