@@ -217,7 +217,7 @@ class IntegrationTests(StaticLiveServerTestCase):
         self.selenium.find_element_by_class_name("btn-outline-primary").click()
         self.selenium.find_element_by_css_selector(".row a[href*='/product/']").click()
         content = self.selenium.find_element_by_css_selector("a[target='_blank']")
-        assert content.text == "Voir la fiche complète d'OpenFoodFacts"
+        assert content.text == "Voir la fiche complète sur OpenFoodFacts"
 
     def test_create_new_account(self):
         """This test gets the 'create account' page and simulates a new user."""
