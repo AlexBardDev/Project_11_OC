@@ -4,6 +4,7 @@ This script contains all the views of my app.
 
 #Standard library
 import re
+from operator import attrgetter
 
 #Import django libraries
 from django.shortcuts import render, redirect
@@ -131,7 +132,18 @@ def bookmark_user(request):
 
     list_bookmarks = Bookmark.objects.filter(id_user=request.user.id)
 
-    context = {"list_bookmarks": list_bookmarks}
+    if list_bookmarks:
+        list_original_products = list(set([bookmark.id_original_product for bookmark in list_bookmarks])) 
+        new_list_bookmarks = []
+        for i in range(len(list_original_products)):
+            new_list = []
+            for bookmark in list_bookmarks:
+                if bookmark.id_original_product == list_original_products[i]:
+                    new_list.append(bookmark)
+            new_list_bookmarks.append(new_list)
+        context = {"list_bookmarks": new_list_bookmarks}
+    else:
+        context = {"list_bookmarks": list_bookmarks}
 
     return render(request, "food_substitute/bookmark.html", context)
 
@@ -144,9 +156,11 @@ def save_product(request, name_substitute, name_product):
     user = request.user
 
     #Create a new bookmark
-    Bookmark.objects.create(id_user=user, id_substitute=substitute, id_original_product=product)
-
-    messages.add_message(request, messages.SUCCESS, "Substitut sauvegardé avec succès !")
+    if Bookmark.objects.filter(id_substitute=substitute.id):
+        messages.add_message(request, messages.SUCCESS, "Ce substitut est déjà enregistré.")
+    else:
+        Bookmark.objects.create(id_user=user, id_substitute=substitute, id_original_product=product)
+        messages.add_message(request, messages.SUCCESS, "Substitut sauvegardé avec succès !")
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

@@ -296,14 +296,10 @@ section form
 	margin-top: 15px;
 }
 
-#bookmarks div[class*="col-md-4"]
-{
-	margin-top: 50px;
-}
-
 #bookmarks h4
 {
-	margin-left: 50px;
+	margin-left: 100px;
+	margin-top: 50px;
 	text-decoration: underline;
 }
 

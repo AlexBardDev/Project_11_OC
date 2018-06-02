@@ -6,18 +6,20 @@
 	<section id="bookmarks">
 		{% if list_bookmarks %}
 			<h2 class="text-center">Vos substituts déjà enregistrés :</h2>
+			{% for bookmarks in list_bookmarks %}
+			<h4>Vos substituts pour <strong>{{ bookmarks.0.id_original_product.name }}</strong> :</h4>
 			<div class="row">
-			{% for bookmark in list_bookmarks %}
-				<h4>Vos substituts pour {{ bookmark.id_original_product.name }} :</h4>
-				<div class="col-md-4 text-center">
-					<p class="nutriscore">{{ bookmark.id_substitute.nutriscore|capfirst }}</p>
-					<a href="{% url 'display' bookmark.id_substitute.name %}">
-					    <img src="{{ bookmark.id_substitute.image }}" alt="image substitute" width="200" height="200"/>
-					    <p>{{ bookmark.id_substitute.name }}</p>
-					</a>
-				</div>
-			{% endfor %}
+				{% for bookmark in bookmarks %}
+					<div class="col-md-4 text-center">
+						<p class="nutriscore">{{ bookmark.id_substitute.nutriscore|capfirst }}</p>
+						<a href="{% url 'display' bookmark.id_substitute.name %}">
+						    <img src="{{ bookmark.id_substitute.image }}" alt="image substitute" width="200" height="200"/>
+						    <p>{{ bookmark.id_substitute.name }}</p>
+						</a>
+					</div>
+				{% endfor %}
 			</div>
+			{% endfor %}
 		{% else %}
 			<h2 class="text-center">Vous n'avez pas encore de substituts enregistrés.</h2>
 		{% endif %}
