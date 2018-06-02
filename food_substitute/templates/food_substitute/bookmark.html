@@ -16,6 +16,7 @@
 						    <img src="{{ bookmark.id_substitute.image }}" alt="image substitute" width="200" height="200"/>
 						    <p>{{ bookmark.id_substitute.name }}</p>
 						</a>
+						<a href="{% url 'delete_substitute' bookmark.id_substitute.name %}">Supprimer ce substitut</a>
 					</div>
 				{% endfor %}
 			</div>

@@ -303,6 +303,17 @@ section form
 	text-decoration: underline;
 }
 
+#bookmarks a:last-child, #bookmarks a:visited:last-child
+{
+	color: red;
+	font-size: 0.8em;
+}
+
+#bookmarks a:hover:last-child
+{
+	text-decoration: underline;
+}
+
 /* Footer */
 footer
 {
