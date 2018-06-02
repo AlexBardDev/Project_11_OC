@@ -12,41 +12,36 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 #Local library
 from .models import Food, Category, NutritionalInformation
 
+def create_new_user():
+    """This method creates a new user in the database."""
+
+    User.objects.create_user("test@mail.com", "test@mail.com", "passwd")
+
+def import_data():
+    """This method imports some data in the database."""
+
+    new_category = Category.objects.create(name="produits-a-tartiner")
+
+    nutri_product = NutritionalInformation.objects.create(calories=539,
+                                                          fat=30, saturated_fat=10,
+                                                          carbohydrates=57, sugars=56,
+                                                          proteins=6, salt=0, sodium=0)
+    product = Food.objects.create(name="Nutella", nutriscore="e",
+                                  image="https://static.openfoodfacts.org/images/products/301/762/042/1006/front_fr.87.400.jpg",
+                                  link="https://fr.openfoodfacts.org/produit/3017620421006/nutella-ferrero",
+                                  id_category=new_category, id_nutritional_information=nutri_product)
+
+    nutri_substitute = NutritionalInformation.objects.create(calories=539,
+                                                             fat=31, saturated_fat=5,
+                                                             carbohydrates=57, sugars=55,
+                                                             proteins=5, salt=0, sodium=0)
+    substitute = Food.objects.create(name="Pralina", nutriscore="d",
+                                     image="https://static.openfoodfacts.org/images/products/326/385/223/1719/front_fr.24.400.jpg",
+                                     link="https://fr.openfoodfacts.org/produit/3263852231719/pralina-leader-price",
+                                     id_category=new_category, id_nutritional_information=nutri_substitute)
+
 class ViewsTests(TestCase):
     """This class contains all the tests for the views of this app."""
-
-    def setUp(self):
-        """This method is called before each test."""
-
-        pass
-
-    def new_food(self):
-        """This function creates new rows in the database."""
-
-        new_category = Category.objects.create(name="produits-a-tartiner")
-
-        nutri_product = NutritionalInformation.objects.create(calories=539,
-                                                              fat=30, saturated_fat=10,
-                                                              carbohydrates=57, sugars=56,
-                                                              proteins=6, salt=0, sodium=0)
-        product = Food.objects.create(name="Nutella", nutriscore="e",
-                                      image="https://static.openfoodfacts.org/images/products/301/762/042/1006/front_fr.87.400.jpg",
-                                      link="https://fr.openfoodfacts.org/produit/3017620421006/nutella-ferrero",
-                                      id_category=new_category, id_nutritional_information=nutri_product)
-
-        nutri_substitute = NutritionalInformation.objects.create(calories=539,
-                                                                 fat=31, saturated_fat=5,
-                                                                 carbohydrates=57, sugars=55,
-                                                                 proteins=5, salt=0, sodium=0)
-        substitute = Food.objects.create(name="Pralina", nutriscore="d",
-                                         image="https://static.openfoodfacts.org/images/products/326/385/223/1719/front_fr.24.400.jpg",
-                                         link="https://fr.openfoodfacts.org/produit/3263852231719/pralina-leader-price",
-                                         id_category=new_category, id_nutritional_information=nutri_substitute)
-
-    def create_user(self):
-        """This function creates a new user for a testing purpose."""
-
-        User.objects.create_user("test@mail.com", "test@mail.com", "passwd")
 
     def login_user(self):
         """This function logs in a user for a testing purpose."""
@@ -68,14 +63,14 @@ class ViewsTests(TestCase):
     def test_search(self):
         """This function tests the 'search' view."""
 
-        self.new_food()
+        import_data()
         response = self.client.get(reverse('search', args=['Nutella']))
         assert response.status_code == 200
 
     def test_display(self):
         """This function tests the 'display' view."""
 
-        self.new_food()
+        import_data()
         response = self.client.get(reverse('display', args=['Nutella']))
         assert response.status_code == 200
 
@@ -116,7 +111,7 @@ class ViewsTests(TestCase):
         """Thus function tests the 'login' view with a POST HTTP method and
         a right user."""
 
-        self.create_user()
+        create_new_user()
         response = self.client.post(reverse('login'), {"email": "test@mail.com",
                                                        "password": "passwd", "next": "next"})
         assert response.status_code == 302
@@ -137,7 +132,7 @@ class ViewsTests(TestCase):
     def test_bookmark_already_logged(self):
         """This function tests the 'bookmark' view when the user is logged."""
 
-        self.create_user()
+        create_new_user()
         self.login_user()
         response = self.client.get(reverse('bookmark'))
         assert response.status_code == 200
@@ -152,9 +147,9 @@ class ViewsTests(TestCase):
     def test_save_product_already_logged(self):
         """This function tests the 'save_product' view when the user is logged."""
 
-        self.create_user()
+        create_new_user()
         self.login_user()
-        self.new_food()
+        import_data()
         response = self.client.get(reverse('save_product', args=['Nutella']))
         assert response.status_code == 302
 
@@ -177,40 +172,12 @@ class IntegrationTests(StaticLiveServerTestCase):
     def tearDownClass(cls):
         cls.selenium.quit()
         super().tearDownClass()
-
-    def import_data(self):
-        """This method imports some data in the database."""
-
-        new_category = Category.objects.create(name="produits-a-tartiner")
-
-        nutri_product = NutritionalInformation.objects.create(calories=539,
-                                                              fat=30, saturated_fat=10,
-                                                              carbohydrates=57, sugars=56,
-                                                              proteins=6, salt=0, sodium=0)
-        product = Food.objects.create(name="Nutella", nutriscore="e",
-                                      image="https://static.openfoodfacts.org/images/products/301/762/042/1006/front_fr.87.400.jpg",
-                                      link="https://fr.openfoodfacts.org/produit/3017620421006/nutella-ferrero",
-                                      id_category=new_category, id_nutritional_information=nutri_product)
-
-        nutri_substitute = NutritionalInformation.objects.create(calories=539,
-                                                                 fat=31, saturated_fat=5,
-                                                                 carbohydrates=57, sugars=55,
-                                                                 proteins=5, salt=0, sodium=0)
-        substitute = Food.objects.create(name="Pralina", nutriscore="d",
-                                         image="https://static.openfoodfacts.org/images/products/326/385/223/1719/front_fr.24.400.jpg",
-                                         link="https://fr.openfoodfacts.org/produit/3263852231719/pralina-leader-price",
-                                         id_category=new_category, id_nutritional_information=nutri_substitute)
-
-    def create_new_user(self):
-        """This method creates a new user in the database."""
-
-        User.objects.create_user("test@mail.com", "test@mail.com", "passwd")
-
+        
     def test_get_home_page_do_a_research_and_see_a_product(self):
         """This test gets the home page. Then, submits a form and does a
         research. And finally, displays the product page."""
 
-        self.import_data()
+        import_data()
         self.selenium.get(self.live_server_url)
         search_input = self.selenium.find_element_by_css_selector("#about input[type='search']")
         search_input.send_keys("Nutella")
@@ -236,8 +203,8 @@ class IntegrationTests(StaticLiveServerTestCase):
         does a research, saves a new substitute, sees the bookmarks page and
         logs out."""
 
-        self.import_data()
-        self.create_new_user()
+        import_data()
+        create_new_user()
 
         self.selenium.get(self.live_server_url + "/login/")
         email_input = self.selenium.find_element_by_name("email")
