@@ -11,14 +11,14 @@
 		{% if list_substitute %}
 			<h3 class="text-center">Vous pouvez remplacer cet aliment par :</h3>
 			<div class="row">
-				{% for product in list_substitute %}
+				{% for substitute in list_substitute %}
 					<div class="col-md-4 text-center">
-						<p class="nutriscore">{{ product.nutriscore|capfirst }}</p>
-						<a href="{% url 'display' product.name %}">
-							<img src="{{ product.image }}" alt="image product" width="200" height="200"/>
-							<p>{{ product.name }}</p>
+						<p class="nutriscore">{{ substitute.nutriscore|capfirst }}</p>
+						<a href="{% url 'display' substitute.name %}">
+							<img src="{{ substitute.image }}" alt="image substitute" width="200" height="200"/>
+							<p>{{ substitute.name }}</p>
 						</a>
-						<p><span class="far fa-save"></span> <a href="{% url 'save_product' product.name %}">Sauvegarder</a></p>
+						<p><span class="far fa-save"></span> <a href="{% url 'save_product' substitute.name product.name %}">Sauvegarder</a></p>
 					</div>
 				{% endfor %}
 			</div>

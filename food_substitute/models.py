@@ -52,7 +52,7 @@ class Bookmark(models.Model):
 
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_substitute = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="substitute")
-    id_original_food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="original_food")
+    id_original_product = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="original_product")
 
     def __str__(self):
         return """{} a enregistré {}.""".format(self.id_user.username, self.id_substitute.name)

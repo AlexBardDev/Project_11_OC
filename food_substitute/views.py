@@ -27,7 +27,7 @@ def home(request):
 def search(request, input_user):
     """This view searches a healthier substitute and shows the results."""
 
-    result = Food.objects.filter(name=input_user)
+    result = Food.objects.filter(name__icontains=input_user)
 
     if len(result) == 0:
         #Find some suggestions with a regex
@@ -136,14 +136,15 @@ def bookmark_user(request):
     return render(request, "food_substitute/bookmark.html", context)
 
 @login_required
-def save_product(request, name_product):
+def save_product(request, name_substitute, name_product):
     """This view saves a new bookmark for the current user."""
 
+    substitute = Food.objects.filter(name=name_substitute)[0]
     product = Food.objects.filter(name=name_product)[0]
     user = request.user
 
     #Create a new bookmark
-    Bookmark.objects.create(id_user=user, id_product=product)
+    Bookmark.objects.create(id_user=user, id_substitute=substitute, id_original_product=product)
 
     messages.add_message(request, messages.SUCCESS, "Substitut sauvegardé avec succès !")
 

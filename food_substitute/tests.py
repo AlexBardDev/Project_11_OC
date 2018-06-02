@@ -141,7 +141,7 @@ class ViewsTests(TestCase):
         """This function tests the 'save_product' view when the user is not yet
         logged."""
 
-        response = self.client.get(reverse('save_product', args=['Nutella']))
+        response = self.client.get(reverse('save_product', args=['Pralina', 'Nutella']))
         assert response.status_code == 302
 
     def test_save_product_already_logged(self):
@@ -150,7 +150,7 @@ class ViewsTests(TestCase):
         create_new_user()
         self.login_user()
         import_data()
-        response = self.client.get(reverse('save_product', args=['Nutella']))
+        response = self.client.get(reverse('save_product', args=['Pralina', 'Nutella']))
         assert response.status_code == 302
 
     def test_legal_notices(self):
