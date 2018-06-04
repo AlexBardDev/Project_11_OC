@@ -169,9 +169,10 @@ def delete_substitute(request, name_substitute):
     """This view removes a bookmark for the current user."""
 
     substitute = Food.objects.filter(name=name_substitute)[0]
-    Bookmark.objects.filter(id_user=request.user.id, id_substitute=substitute.id).delete()
+    Bookmark.objects.filter(id_user=request.user.id,
+                            id_substitute=substitute.id).delete()
 
-    messages.add_message(request, messages.SUCCESS, "Substitut supprimé.")
+    messages.add_message(request, messages.SUCCESS, "Substitut supprimé")
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
