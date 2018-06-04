@@ -16,7 +16,28 @@
 						    <img src="{{ bookmark.id_substitute.image }}" alt="image substitute" width="200" height="200"/>
 						    <p>{{ bookmark.id_substitute.name }}</p>
 						</a>
-						<a href="{% url 'delete_substitute' bookmark.id_substitute.name %}">Supprimer ce substitut</a>
+						<!-- Button to open a modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal{{ bookmark.id_substitute.name|cut:" "|cut:"'" }}">
+							Supprimer ce substitut
+						</button>
+						<!-- Modal -->
+						<div class="modal fade" id="modal{{ bookmark.id_substitute.name|cut:" "|cut:"'" }}">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										Supprimer {{ bookmark.id_substitute.name }}
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+										Voulez-vous vraiment supprimer {{ bookmark.id_substitute.name }} de la liste de vos substituts enregistrés ?
+										<a href="{% url 'delete_substitute' bookmark.id_substitute.name %}">Supprimer ce substitut</a>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				{% endfor %}
 			</div>
